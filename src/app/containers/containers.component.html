@@ -1,0 +1,106 @@
+<div>
+
+    <h1 class="page-header"><i class="fa fa-cubes"></i> Containers</h1>
+    <p-confirmDialog width="550" header="Delete Confirmation"></p-confirmDialog>
+
+    <p-dialog header="{{'Details for Container ' + WMCd.Name}}" [(visible)]="pDDisplay"
+     width="600" height="700">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>ID:</dt>
+                <dd>{{WMCd.Id?.substr(0, 50)+' ...'}}</dd>
+
+                <dt>Image:</dt>
+                <dd>{{WMCd.Config?.Image}}</dd>
+
+                <dt>Command:</dt>
+                <dd>{{WMCd.Config?.Cmd.join(' ')}}</dd>
+
+                <dt>Status:</dt>
+                <dd>{{WMCd.State?.Status}}</dd>
+
+                <dt>Started at:</dt>
+                <dd>{{WMCd.State?.StartedAt}}</dd>
+
+                <dt>Working dir:</dt>
+                <dd>{{WMCd.Config?.WorkingDir}}</dd>
+
+                <dt>Shm Size:</dt>
+                <dd>{{WMCd.HostConfig?.ShmSize}}</dd>
+            </dl>
+        </div>
+        <div>
+            <legend>Network</legend>
+                <dl class="dl-horizontal">
+                    <dt>Hostname:</dt>
+                    <dd>{{WMCd.Config?.Hostname}}</dd>
+
+                    <dt>IP Address:</dt>
+                    <dd >{{WMCd.NetworkSettings?.IPAddress}}</dd>
+
+                                        <dt>Gateway:</dt>
+                    <dd ng-bind="network.Gateway">{{WMCd.NetworkSettings?.Gateway}}</dd>
+
+                    <dt>MAC Address:</dt>
+                    <dd ng-bind="network.MacAddress">{{WMCd.NetworkSettings?.MacAddress}}</dd>
+                </dl>
+        </div>
+        <div hight="500px">
+            <legend>Raw Information</legend>
+            <pre class="contDetails-raw">{{ WMCd|json }}</pre>
+        </div>
+    </p-dialog>
+
+    <p-dataTable [value]="WMC">
+        <p-column field="name" header="Name" [sortable]="true"></p-column>
+        <p-column field="image" header="Image" [sortable]="true"></p-column>
+        <p-column field="status" header="Status" [style]="{'width':'125px'}"></p-column>
+
+        <p-column field="state" header="State" [style]="{'width':'48px'}">
+            <template let-col let-stat="rowData" pTemplate="body">
+                <span [hidden]="stat[col.field]!=='running'"> 
+                            <i class="text-success fa fa-play"></i>
+                </span>
+                <span [hidden]="stat[col.field]!=='paused'"> 
+                            <i class="text-warning fa fa-pause"></i>
+                </span>
+                <span [hidden]="stat[col.field]!=='exited'"> 
+                            <i class="text-danger fa fa-stop"></i>
+                </span>
+                <span [hidden]="stat[col.field]!=='created'"> 
+                            <i class="text-danger fa fa-stop"></i>
+                </span>
+            </template>
+        </p-column>
+
+        <p-column field="state" header="Action" [style]="{'width':'135px'}">
+            <template let-col let-st="rowData" pTemplate="body">
+                <span [hidden]="st[col.field]!=='paused'">
+                    <button type="button" pButton (click)="conResolve(st)"
+                     class="ui-button-warning" icon="fa-play"></button>
+                </span>
+                <span [hidden]="st[col.field]!=='exited' && st[col.field]!=='created'">
+                    <button type="button" pButton (click)="conStart(st)"
+                     class="ui-button-succes" icon="fa-play"></button>
+                </span>
+                <span [hidden]="st[col.field]!=='running'"> 
+                    <button type="button" pButton (click)="conStop(st)"
+                     class="ui-button-danger" icon="fa-stop"></button>
+                </span>
+                <span [hidden]="st[col.field]!=='running'"> 
+                    <button type="button" pButton (click)="conPause(st)"
+                     class="ui-button-warning" icon="fa-pause"></button>
+                </span>
+                <button type="button" pButton (click)="conDelete(st)" icon="fa-trash"></button>
+            </template>
+        </p-column>
+
+        <p-column field="state" header="Info" [style]="{'width':'55px'}">
+            <template pTemplate="body" let-con="rowData">
+                <button type="button" pButton (click)="conDetails(con)" class="ui-button-info" icon="fa-search">
+                </button>
+            </template>
+        </p-column>
+
+    </p-dataTable>
+</div>

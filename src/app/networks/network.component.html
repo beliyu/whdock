@@ -1,0 +1,57 @@
+<div>
+
+    <h1 class="page-header"><i class="fa fa-sitemap"></i> Networks</h1>
+
+    <addnet-component [hidden]="addSt" (buttSub)="addNetw($event)"></addnet-component>
+
+    <div class="pull-right">
+        <button type="button" pButton (click)="addSt=true" *ngIf="!addSt" label="Close Form"> 
+                </button>
+        <button type="button" pButton class="ui-button-danger" *ngIf="waitSt" label="  Wait ...  "> 
+                </button>
+        <button type="button" pButton (click)="addSt=false" class="ui-button-succes"
+            *ngIf="addSt" [disabled]="waitSt" label="Add Network"> 
+                </button>
+        <button type="button" pButton (click)="whmGetAll()" [disabled]="waitSt" icon="fa-refresh">
+                </button>
+    </div>
+
+    <p-confirmDialog width="550" header="Delete Confirmation"></p-confirmDialog>
+
+    <h4 class="clearfix">Custom Networks</h4>
+    <p-dataTable [value]="WMNc">
+        <p-column field="name" header="Name" [sortable]="true"></p-column>
+        <p-column field="gateway" header="Gateway" [style]="{'width':'120px'}"></p-column>
+        <p-column field="iprange" header="IPRange" [style]="{'width':'120px'}"></p-column>
+        <p-column field="subnet" header="Subnet" [style]="{'width':'120px'}"></p-column>
+        <p-column field="driver" header="Driver" [style]="{'width':'70px'}"></p-column>
+        <p-column field="scope" header="Scope" [style]="{'width':'55px'}"></p-column>
+
+        <p-column field="Id" [style]="{'width':'55px'}">
+            <template pTemplate="body" let-netw="rowData">
+                <button type="button" pButton (click)="remove(netw)" class="ui-button-warning"
+                 icon="fa-remove">
+                </button>
+            </template>
+        </p-column>
+    </p-dataTable>
+
+    <h4>Internal Networks</h4>
+    <p-dataTable [value]="WMNi">
+        <p-column field="name" header="Name" [sortable]="true"></p-column>
+        <p-column field="gateway" header="Gateway" [style]="{'width':'120px'}"></p-column>
+        <p-column field="iprange" header="IPRange" [style]="{'width':'120px'}"></p-column>
+        <p-column field="subnet" header="Subnet" [style]="{'width':'120px'}"></p-column>
+        <p-column field="driver" header="Driver" [style]="{'width':'70px'}"></p-column>
+        <p-column field="scope" header="Scope" [style]="{'width':'55px'}"></p-column>
+
+        <p-column field="Id" [style]="{'width':'55px'}">
+            <template pTemplate="body" let-netw="rowData">
+                <button type="button" pButton (click)="remove(netw.Id)" class="ui-button-danger"
+                *ngIf="false" icon="fa-remove">
+                </button>
+            </template>
+        </p-column>
+    </p-dataTable>
+
+</div>

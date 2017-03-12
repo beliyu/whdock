@@ -1,0 +1,42 @@
+<h3>Add Network ... </h3>
+
+<form [formGroup]="form1" (ngSubmit)="addNet()">
+    <div class="form-group">
+        <label>Name:</label>
+        <input type="text" formControlName="name" required class="form-control" 
+            pattern="^[a-z0-9\-]+$">
+        <div class="bg-info" [hidden]="!form1.controls['name'].errors?.required">
+            Name is required field</div>
+        <div class="bg-info" [hidden]="!form1.hasError('pattern', 'name')">
+             Name can only consist of lower case letters, numbers and dash (-). </div>
+    </div>
+    <div class="form-group">
+        <label>Subnet:</label>
+        <input type="text" formControlName="subnet" class="form-control" 
+            pattern="\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\/\d{1,2}\b">
+        <div class="bg-info" [hidden]="!form1.hasError('required', 'subnet')">
+            Subnet is required field</div>
+        <div class="bg-info" [hidden]="!form1.hasError('pattern', 'subnet')">
+            Please corect the value - format xxx.xxx.xxx.xxx/xx </div>
+    </div>
+    <div class="form-group">
+        <label>IP Range:</label>
+        <input type="text" formControlName="ipRange" class="form-control" 
+            pattern="\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\/\d{1,2}\b">
+        <div class="bg-info" [hidden]="!form1.hasError('required', 'ipRange')">
+            IP Range is required field</div>
+        <div class="bg-info" [hidden]="!form1.hasError('pattern', 'ipRange')">
+            Please corect the value - format xxx.xxx.xxx.xxx/xx </div>
+    </div>
+    <div class="form-group">
+        <label>Gateway:</label>
+        <input type="text" formControlName="gateway" class="form-control" 
+            pattern="\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b">
+        <div class="bg-info" [hidden]="!form1.hasError('required', 'gateway')">
+            Gateway is required field</div>
+        <div class="bg-info" [hidden]="!form1.hasError('pattern', 'gateway')">
+            Please corect the value - format xxx.xxx.xxx.xxx </div>
+    </div>
+    <button type="Submit" pButton [disabled]="!form1.valid" label="Submit"> 
+    </button>
+</form>

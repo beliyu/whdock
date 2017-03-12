@@ -1,0 +1,72 @@
+<h1 class="page-header"><i class="fa fa-microchip"></i> Home</h1>
+
+
+<div class="row">
+    <div class="col-lg-3 col-xs-6">
+        <small-box hed="{{WMNsi.Containers}}" par="Containers" col="#fff" bgcol="#00c0ef" cla="fa-cubes"></small-box>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+        <small-box hed="{{WMNv}}" par="Volumes" col="#fff" bgcol="#00a65a" cla="fa-server"></small-box>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+        <small-box hed="{{WMNn}}" par="Networks" col="#fff" bgcol="#f39c12 " cla="fa-sitemap"></small-box>
+    </div>
+    <div class="col-lg-3 col-xs-6">
+        <small-box hed="{{WMNsi.Images}}" par="Images" col="#fff" bgcol="#dd4b39" cla="fa-building-o"></small-box>
+    </div>
+</div>
+
+<div>
+    <legend>Docker Engine</legend>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <dl class="dl-horizontal">
+                <dt>Engine Version:</dt>
+                <dd > {{WMNsi.ServerVersion}} </dd>
+
+                <dt>API Version:</dt>
+                <dd > {{WMNsv.ApiVersion}} </dd>
+
+                <dt>Go Version:</dt>
+                <dd > {{WMNsv.GoVersion}} </dd>
+
+                <dt>Hostname:</dt>
+                <dd > {{WMNsi.Name}} </dd>
+
+                <dt>Host IP:</dt>
+                <dd > {{WMNsv.hostip}} </dd>
+
+                <dt>Driver:</dt>
+                <dd > {{WMNsi.Driver}} </dd>
+
+                <dt>System time:</dt>
+                <dd > {{WMNsi.SystemTime|date:'yyyy-MM-dd HH:mm:ss'}} </dd>
+            </dl>
+        </div>
+        <div class="col-sm-6">
+            <dl class="dl-horizontal">
+                <dt>Architecture:</dt>
+                <dd > {{WMNsi.Architecture}} </dd>
+
+                <dt>CPUs:</dt>
+                <dd ng-bind="info.NCPU"> {{WMNsi.NCPU}} </dd>
+
+                <dt>Server Version:</dt>
+                <dd ng-bind="info.MemTotal"> {{WMNsi.ServerVersion}} </dd>
+
+                <dt>Total Memory:</dt>
+                <dd ng-bind="info.MemTotal"> {{WMNsi.MemTotal}} </dd>
+
+                <dt>OS Type:</dt>
+                <dd ng-bind="info.MemTotal"> {{WMNsi.OSType}} </dd>
+
+                <dt>Operating System:</dt>
+                <dd >{{WMNsi.OperatingSystem}}</dd>
+
+                <dt>Kernel Version:</dt>
+                <dd >{{WMNsi.KernelVersion}}</dd>
+            </dl>
+        </div>
+    </div>
+</div>
